@@ -1,16 +1,19 @@
 package com.adkan.adkan.dates;
 
+import com.adkan.adkan.projects.Project;
+import com.adkan.adkan.user_histories.UserHistory;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @javax.persistence.Entity
 @Table(name = "dates")
 @Data
-public class dates {
+public class AdkanDate implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +38,10 @@ public class dates {
     @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToOne(mappedBy = "date")
+    private Project project;
+
+    @OneToOne(mappedBy = "date")
+    private UserHistory userHistory;
 }

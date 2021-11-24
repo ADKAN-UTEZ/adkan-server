@@ -1,6 +1,9 @@
 package com.adkan.adkan.employee;
 
 import com.adkan.adkan.roles.Role;
+import com.adkan.adkan.teams.EmployeeTeam;
+import com.adkan.adkan.user_histories.UserHistory;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -8,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @javax.persistence.Entity
 @Table(name = "employees")
@@ -53,6 +57,12 @@ public class Employee implements Serializable {
     private LocalDateTime updatedAt;
 
     // Relationships
+    @JsonIgnore
+    @OneToMany(mappedBy = "employee")
+    List<EmployeeTeam> employeeTeamList;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "employee")
+    List<UserHistory> histories;
 
 }
