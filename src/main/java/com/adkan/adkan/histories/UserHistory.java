@@ -1,4 +1,4 @@
-package com.adkan.adkan.user_histories;
+package com.adkan.adkan.histories;
 
 import com.adkan.adkan.board.Board;
 import com.adkan.adkan.dates.AdkanDate;
@@ -17,8 +17,10 @@ public class UserHistory implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column( columnDefinition= "varchar(60)")
     private String name;
 
+    @Column(columnDefinition= "varchar(240)")
     private String description;
 
     @ManyToOne
@@ -26,7 +28,7 @@ public class UserHistory implements Serializable {
     private Board board;
 
     @ManyToOne
-    @JoinColumn(name = "employsee_id")
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
     @OneToOne(cascade = CascadeType.ALL)

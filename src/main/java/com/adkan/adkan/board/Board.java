@@ -1,7 +1,7 @@
 package com.adkan.adkan.board;
 
 import com.adkan.adkan.phases.Phase;
-import com.adkan.adkan.user_histories.UserHistory;
+import com.adkan.adkan.histories.UserHistory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 

@@ -1,7 +1,7 @@
 package com.adkan.adkan.dates;
 
+import com.adkan.adkan.histories.UserHistory;
 import com.adkan.adkan.projects.Project;
-import com.adkan.adkan.user_histories.UserHistory;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;

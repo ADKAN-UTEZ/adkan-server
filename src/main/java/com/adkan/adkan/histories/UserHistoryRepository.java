@@ -1,4 +1,4 @@
-package com.adkan.adkan.user_histories;
+package com.adkan.adkan.histories;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

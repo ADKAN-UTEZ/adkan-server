@@ -1,4 +1,5 @@
-package com.adkan.adkan.board;
+package com.adkan.adkan.roles;
+
 
 import com.adkan.adkan.common.ServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,52 +11,51 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 @Service
-public class BoardService implements ServiceInterface<Board> {
-    /** Service Class
-     * A Service class helps to contain all entity logic in a single class
-     */
+public class RoleService implements ServiceInterface<Role> {
+
     @Autowired
-    private BoardRepository boardRepository;
+    private RoleRepository roleRepository;
+
     @Override
-    public List<Board> getAll() {
-        return (List<Board>) boardRepository.findAll();
+    public List<Role> getAll() {
+        return (List<Role>) roleRepository.findAll();
     }
 
     @Override
-    public Optional<Board> getById(int id) {
-        return boardRepository.findById(id);
+    public Optional<Role> getById(int id) {
+        return roleRepository.findById(id);
     }
 
     @Override
-    public Board save(Board entity) {
-        return boardRepository.save(entity);
+    public Role save(Role entity) {
+        return roleRepository.save(entity);
     }
 
     @Override
-    public Optional<Board> update(Board entity) {
-        Optional<Board> updatedEntity = Optional.empty();
-        updatedEntity = boardRepository.findById(entity.getId());
+    public Optional<Role> update(Role entity) {
+        Optional<Role> updatedEntity = Optional.empty();
+        updatedEntity = roleRepository.findById(entity.getId());
         if (!updatedEntity.isEmpty())
-            boardRepository.save(entity);
+            roleRepository.save(entity);
         return updatedEntity;
     }
 
     @Override
-    public Optional<Board> partialUpdate(Integer id, Map<Object, Object> fields) {
+    public Optional<Role> partialUpdate(Integer id, Map<Object, Object> fields) {
         try {
-            Board entity = getById(id).get();
+            Role entity = getById(id).get();
             if (entity == null) {
                 return Optional.empty();
             }
-            Optional<Board> updatedEntity = Optional.empty();
+            Optional<Role> updatedEntity = Optional.empty();
             // Map key is field name, v is value
             fields.forEach((updatedField, value) -> {
                 // use reflection to get fields updatedField on manager and set it to value updatedField
-                Field field = ReflectionUtils.findField(Board.class, (String) updatedField);
+                Field field = ReflectionUtils.findField(Role.class, (String) updatedField);
                 field.setAccessible(true);
                 ReflectionUtils.setField(field, entity, value);
             });
-            boardRepository.save(entity);
+            roleRepository.save(entity);
             updatedEntity = Optional.of(entity);
             return updatedEntity;
         } catch (Exception exception) {
@@ -65,10 +65,10 @@ public class BoardService implements ServiceInterface<Board> {
     }
 
     @Override
-    public Optional<Board> delete(int id) {
-        Optional<Board> entity = Optional.empty();
+    public Optional<Role> delete(int id) {
+        Optional<Role> entity = Optional.empty();
         entity = getById(id).map(e -> {
-            boardRepository.delete(e);
+            roleRepository.delete(e);
             return e;
         });
         return entity;

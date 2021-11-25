@@ -2,7 +2,7 @@ package com.adkan.adkan.employee;
 
 import com.adkan.adkan.roles.Role;
 import com.adkan.adkan.teams.EmployeeTeam;
-import com.adkan.adkan.user_histories.UserHistory;
+import com.adkan.adkan.histories.UserHistory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -28,6 +28,12 @@ public class Employee implements Serializable {
 
     @Column(nullable = false,  unique = true, columnDefinition= "varchar(60)")
     private String enrollment;
+
+    @Column(nullable = false,  unique = true, columnDefinition= "varchar(60)")
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
 
     @Column(nullable = false, columnDefinition= "varchar(60)")
     private String name;
