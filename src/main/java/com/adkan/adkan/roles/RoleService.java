@@ -66,12 +66,10 @@ public class RoleService implements ServiceInterface<Role> {
 
     @Override
     public Optional<Role> delete(int id) {
-        Optional<Role> entity = Optional.empty();
-        entity = getById(id).map(e -> {
-            roleRepository.delete(e);
-            return e;
-        });
+        Optional<Role> entity = getById(id);
+        if(entity.isPresent()){
+            roleRepository.delete(entity.get());
+        }
         return entity;
-
     }
 }

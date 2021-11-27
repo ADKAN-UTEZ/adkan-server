@@ -20,14 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
     private AdkanEmployeeService service;
 
     @Autowired
-    private JWTUtil jwtUtil;
+    private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private JWTUtil jwtUtil;
 
     @PostMapping("")
     public ResponseEntity<AuthenticationResponse> createToken(@RequestBody AuthenticationRequest request) {
@@ -36,11 +35,16 @@ public class AuthController {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
             UserDetails userDetails = service.loadUserByUsername(request.getEmail());
             String jwt = jwtUtil.generateToken(userDetails);
-            return new ResponseEntity<>(new AuthenticationResponse(jwt), HttpStatus.OK);
+            if (jwt != null){
+                Employee employee = service.authenticate(request).get();
+                return new ResponseEntity<>(new AuthenticationResponse(jwt, employee), HttpStatus.OK);
+            }
         } catch (BadCredentialsException e) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
     }
+
 
 
 }

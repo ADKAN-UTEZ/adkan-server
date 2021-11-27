@@ -1,8 +1,9 @@
 package com.adkan.adkan.common;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 public interface ControllerInterface <T>{
@@ -12,12 +13,12 @@ public interface ControllerInterface <T>{
      *  In this part we don't use classes such as Optional because we handle
      * the response through the Object ResponseEntity accompanied by an HTTP status.
      */
-    ResponseEntity<List<T>> getAll();
-    ResponseEntity<T> getById(Integer id);
-    ResponseEntity<T> save(T entity);
-    ResponseEntity<T> update(T entity);
-    ResponseEntity<T> partialUpdate(Integer id, Map<Object,Object> fields);
-    ResponseEntity<T> delete(Integer id);
-
+    ResponseEntity getAll();
+    ResponseEntity getById(Integer id);
+    ResponseEntity save(T entity);
+    ResponseEntity update(T entity);
+    ResponseEntity partialUpdate(Integer id, Map<Object,Object> fields);
+    ResponseEntity delete(Integer id);
+    ResponseEntity errorResponse(Exception exception,  Map<String, Object> response);
 }
 
